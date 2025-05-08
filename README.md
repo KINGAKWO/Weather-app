@@ -63,6 +63,10 @@ The app features a clean, modern design with:
 - Clear error message display
 - Custom background image
 
+## Snap
+![image](https://github.com/user-attachments/assets/5f41b475-c1ce-4e6e-8bd8-9df9110cf494)
+
+
 ## Future Improvements
 
 - Add weather forecast functionality
