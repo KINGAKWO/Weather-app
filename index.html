@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Weather application to check weather conditions">
     <link rel="stylesheet" href="style.css">
-    <title>Weather app</title>
+    <title>Weather App</title>
 </head>
 <body>
     <div class="container">
-        <h1>Weather App</h1>
-        <div class="searchContainer">
-            <input class="inputField" id="cityField" placeholder="Enter City name..." type="text"/>
-            <button id="searchBtn">Search</button>
-        </div>
-        <div id="weatherContainer">
-            <h2 id="cityName"></h2>
-            <p id="temperature"></p>
-            <p id="coondition"></p>
-            <p id="windSpeed"></p>
-        </div>
-         <p id="errorMessage"></p>
-        </div>
-        <script src="script.js"></script>
-            
-
+        <header>
+            <h1>Weather App</h1>
+        </header>
+        <main>
+            <form class="searchContainer" onsubmit="return false;">
+                <label for="cityField">City name:</label>
+                <input 
+                    class="inputField" 
+                    id="cityField" 
+                    placeholder="Enter City name..." 
+                    type="text"
+                />
+                <button id="searchBtn" type="button">Search</button>
+            </form>
+            <div id="weatherContainer">
+                <h2 id="cityName"></h2>
+                <p id="temperature"></p>
+                <p id="condition"></p>
+                <p id="windSpeed"></p>
+            </div>
+            <p id="errorMessage" role="alert"></p>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>

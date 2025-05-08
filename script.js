@@ -16,7 +16,7 @@ async function getCoordinates(city) {
         throw new Error("City not found");
     }
     const data = await response.json();
-    if(data.results || data.results.length === 0) {
+    if(!data.results || data.results.length === 0) {
         throw new Error("City not found");
     }
 

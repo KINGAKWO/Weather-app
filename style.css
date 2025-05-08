@@ -1,3 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .container {
     max-width: 400px;
     background: white;
@@ -6,27 +17,70 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.searchContainer   {
+.searchContainer {
     margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
+
 .inputField {
-    width: 70%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
 }
+
+.inputField:focus {
+    border-color: #015bbb;
+    outline: none;
+}
+
 #searchBtn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: #015bbb;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+#searchBtn:hover {
+    background-color: #014a96;
+}
+
 #weatherContainer {
     display: none;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 20px;
 }
+
 #errorMessage {
-    color: red;
+    color: #dc3545;
     font-weight: bold;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    text-align: center;
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .inputField {
+        width: 100%;
+    }
+    
+    #searchBtn {
+        width: 100%;
+    }
 }
