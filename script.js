@@ -27,3 +27,41 @@ async function getCoordinates(city) {
     }
     
 }
+async function getWeather(latitude, longitude, name, country) {
+    try {
+        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`     
+        );
+
+        if(!response.ok) {
+            throw new Error("Failed to fetch weather data");
+        }
+        const data = await response.json();
+        displayWeather(data.current_weather, city, country);
+    } catch (error) {
+        showError(error.message);
+    }
+}
+
+function displayWeather(weather, city, country) {
+    const weatherContainer = document.getElementById("weatherContainer");
+    const cityHeader = document.getElementById("cityName");
+    const temp = document.getElementById("temperature");
+    const condition = document.getElementById("condition");  
+    const windSpeed = document.getElementById("windSpeed");
+
+    const weatherCondition = weatherDescription[weather.weathercode] || "Unknown";
+
+    weatherContainer.style.display = "block";
+    cityHeader.textContent = `${city}, ${country}`;
+    temp.textContent = `${weather.temperature}°C`;
+    condition.textContent = weatherCondition;
+    windSpeed.textContent = `${weather.windspeed} km/h`;
+}
+
+function showError(message) {
+    const weatherContainer = document.getElementById("weatherContainer");
+    weatherContainer.style.display = "none";
+    const errorPara = document.getElementById("errorMessage");
+    errorPara.textContent = message;
+    errorPara.style.display = message ? "block" : "none";
+}
