@@ -1,20 +1,23 @@
-document.getElementById("searchBtn").addEventListener("click", ()=> {
+document.getElementById("searchBtn").addEventListener("click", () => {
     const city = document.getElementById("cityField").value.trim();
-    if(city) {
-        getCoordinates(city);
-    }else {
+    if(!city) {
         showError("Please enter a city name");
+        return;
     }
+    if(!/^[a-zA-Z\s-]+$/.test(city)) {
+        showError("Please enter a valid city name");
+        return;
+    }
+    getCoordinates(city);
 });
 async function getCoordinates(city) {
     showError("");
     try {
-        const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`
-    );
+        const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`);
 
-    if (!response.ok) {
-        throw new Error("City not found");
-    }
+        if (!response.ok) {
+            throw new Error("City not found");
+        }
     const data = await response.json();
     if(!data.results || data.results.length === 0) {
         throw new Error("City not found");
@@ -25,7 +28,6 @@ async function getCoordinates(city) {
     } catch (error) {
         showError(error.message);
     }
-    
 }
 async function getWeather(latitude, longitude, name, country) {
     try {
@@ -41,8 +43,29 @@ async function getWeather(latitude, longitude, name, country) {
         showError(error.message);
     }
 }
-
-
+document.getElementById("cityField").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        document.getElementById("searchBtn").click();
+    }
+});
+const weatherDescription = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Depositing rime fog",
+    51: "Light drizzle",
+    53: "Moderate drizzle",
+    55: "Dense drizzle",
+    61: "Slight rain",
+    63: "Moderate rain",
+    65: "Heavy rain",
+    71: "Slight snow fall",
+    73: "Moderate snow fall",
+    75: "Heavy snow fall",
+    95: "Thunderstorm"
+};
 function displayWeather(weather, city, country) {
     const weatherContainer = document.getElementById("weatherContainer");
     const cityHeader = document.getElementById("cityName");
