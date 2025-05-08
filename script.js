@@ -42,6 +42,7 @@ async function getWeather(latitude, longitude, name, country) {
     }
 }
 
+
 function displayWeather(weather, city, country) {
     const weatherContainer = document.getElementById("weatherContainer");
     const cityHeader = document.getElementById("cityName");
